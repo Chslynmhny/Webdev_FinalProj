@@ -1,0 +1,76 @@
+﻿
+@{
+    ViewBag.Title = "ShowUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var userList = (IEnumerable<user>)ViewData["UserList"];
+}
+
+<style>
+    table {
+        border: 3px solid #3e0bce;
+        border-collapse: collapse;
+        width: 100%;
+        font-family: Arial, sans-serif;
+    }
+
+    th {
+        background: #3e0bce;
+        color: #fff;
+        padding: 10px;
+        text-align: center;
+    }
+
+    tr {
+        background-color: #D6EEEE;
+        text-align: center;
+    }
+
+    button {
+        background-color: #3e0bce;
+        color: #fff;
+        border: none;
+        border-radius: 10px; 
+        padding: 10px;
+        margin: 5px;
+        margin-left: 29%;
+        width: 100px;
+        height: 30px;
+        display: flex; 
+        align-items: center; 
+        justify-content: center; 
+
+    }
+
+
+</style>
+
+
+<h2>Show User</h2>
+<table border="1">
+    @{
+        foreach (var item in userList)
+        {
+            <tr>
+                <td style="padding: 20px;">@item.firstname</td>
+                <td style="padding: 20px;">@item.lastname</td>
+                <td style="padding: 20px;">@item.email</td>
+                <td style="padding: 20px;">@item.password</td>
+                <td style="padding: 20px;">
+                    <form method="post" action="UserUpdate">
+                        <input type="hidden" name="id" value="@item.userId" />
+                        <button type="submit">Edit</button>
+                    </form>
+                    <form method="post" action="UserDelete">
+                        <input type="hidden" name="id" value="@item.userId" />
+                        <button type="submit">Delete</button>
+                    </form>
+
+
+                </td>
+            </tr>
+        }
+
+
+    }
+</table>
+
